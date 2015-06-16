@@ -135,6 +135,9 @@ public class TextChatFragment extends Fragment {
     //To check if the next item is visible or not.
     //Add a notification if it is not visible to allow the scroll the ChatMessage list.
     private void showNewMsgNotification(boolean visible) {
+        mMsgNotificationView.setTextColor(getResources().getColor(R.color.text));
+        mMsgNotificationView.setText("New messages");
+
         if (visible) {
             mMsgDividerView.setVisibility(View.VISIBLE);
             mMsgNotificationView.setVisibility(View.VISIBLE);
@@ -188,8 +191,7 @@ public class TextChatFragment extends Fragment {
                 mMsgEditText.setEnabled(true);
                 mMsgEditText.setFocusable(true);
                 mMsgEditText.setText("");
-                mMsgNotificationView.setTextColor(getResources().getColor(R.color.text));
-                mMsgNotificationView.setText("New messages");
+                mListView.smoothScrollToPosition(mMessageAdapter.getCount());
             }
         }
     }
