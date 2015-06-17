@@ -43,7 +43,7 @@
 
     <ImageView
         android:id="@+id/rectangleView"
-        android:layout_width="15dp"
+        android:layout_width="12dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
     />
