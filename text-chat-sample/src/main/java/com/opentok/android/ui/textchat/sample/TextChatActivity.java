@@ -178,9 +178,8 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         ChatMessage msg;
         if (!connection.getConnectionId().equals(mSession.getConnection().getConnectionId())) {
             //message is from other participant --> the status of the ChatMessage is RECEIVED_MESSAGE.
-            //Alias for this participant will be the 5 first digits of its connection
-            //
-            msg = new ChatMessage(connection.getConnectionId().substring(1, 5), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
+            //E.g: The alias of the new message received is the value added as connection data.
+            msg = new ChatMessage(connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
         }
         else {
             //message is from me --> the status of the ChatMessage is SENT_MESSAGE.
