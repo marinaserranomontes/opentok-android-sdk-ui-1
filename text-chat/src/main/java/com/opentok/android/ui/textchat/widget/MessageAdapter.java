@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.opentok.android.ui.textchat.ChatMessage;
 import com.opentok.android.ui.textchat.R;
 
 import java.text.SimpleDateFormat;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class MessageAdapter extends ArrayAdapter<ChatMessage> {
+class MessageAdapter extends ArrayAdapter<ChatMessage> {
 
     private final static int VIEW_TYPE_ROW_SENT = 0;
     private final static int VIEW_TYPE_ROW_SENT_GROUP = 1;
