@@ -31,6 +31,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+* A Fragment for adding and controling text chat user interface.
+*/
 public class TextChatFragment extends Fragment {
 
     private final static String LOG_TAG = "TextChatFragment";
@@ -95,24 +98,37 @@ public class TextChatFragment extends Fragment {
         return rootView;
     }
 
-    //Callback to indicate a new output message is ready to be sent
+    /**
+     * An interface for receiving events when a text chat message is ready to send.
+     */
     public interface TextChatListener {
+        /**
+         * Called when a message in the TextChatFragment is ready to send. A message is
+         * ready to send when the user clicks the Send button in the TextChatFragment
+         * user interface.
+         */
         public boolean onMessageReadyToSend(String msgStr);
     }
 
     protected TextChatListener textChatListener;
 
-
+    /**
+     * Set the object that receives events for this TextChatListener.
+     */
     public void setTextChatListener(TextChatListener textChatListener) {
         this.textChatListener = textChatListener;
     }
 
-    //To set the maximum length of the ChatMessage
+    /**
+     * Set the maximum length of a text chat message.
+     */
     public void setMaxTextLength(int length) {
         maxTextLength = length;
     }
 
-    //Add message to the UI text-chat component
+    /**
+     * Add a message to the TextChatListener received message list.
+     */
     public void addMessage(ChatMessage msg) {
         Log.i(LOG_TAG, "New message " + msg.getText() + " is ready to be added.");
         boolean messageGroup = false;
@@ -132,8 +148,8 @@ public class TextChatFragment extends Fragment {
         }
     }
 
-    //To check if the next item is visible or not.
-    //Add a notification if it is not visible to allow the scroll the ChatMessage list.
+    // To check if the next item is visible or not. Add a notification if it is
+    // not visible, to allow the scroll the ChatMessage list.
     private void showNewMsgNotification(boolean visible) {
         mMsgNotificationView.setTextColor(getResources().getColor(R.color.text));
         mMsgNotificationView.setText("New messages");
@@ -147,7 +163,7 @@ public class TextChatFragment extends Fragment {
         }
     }
 
-    //To check if the new message is visible in the list
+    // To check if the new message is visible in the list
     private boolean isNewMessageVisible() {
 
         int last = mListView.getLastVisiblePosition();
@@ -171,7 +187,7 @@ public class TextChatFragment extends Fragment {
         return false;
     }
 
-    //Click sendButton
+    // Called when the user clicks the Send button.
     private void sendMessage() {
         //checkMessage
         mMsgEditText.setEnabled(false);
@@ -196,6 +212,14 @@ public class TextChatFragment extends Fragment {
         }
     }
 
+    /**
+     * Called when a message in the TextChatFragment is ready to send. A message is
+     * ready to send when the user clicks the Send button in the TextChatFragment
+     * user interface.
+     * 
+     * If you subclass the TextChatFragment class and implement this method,
+     * you do not need to set a TextChatListener.
+     */
     protected void onMessageReadyToSend(String msgStr) {
         if (this.textChatListener != null) {
             Log.d(LOG_TAG, "onMessageReadyToSend");
@@ -203,7 +227,7 @@ public class TextChatFragment extends Fragment {
         }
     }
 
-    // Countdown the characters left
+    // Count down the characters left.
     private TextWatcher mTextEditorWatcher = new TextWatcher() {
 
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -220,7 +244,6 @@ public class TextChatFragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-
         }
     };
 
