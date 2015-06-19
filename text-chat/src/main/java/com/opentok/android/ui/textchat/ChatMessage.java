@@ -18,18 +18,20 @@ public class ChatMessage {
     protected MessageStatus status;
     private UUID id;
 
-    public ChatMessage(String text) {
-        this.text = text;
-        this.id= UUID.randomUUID();
-    }
-
     public ChatMessage(String sender, String text) {
+
+        if ( sender == null ) {
+            throw new IllegalArgumentException("The sender alias cannot be null");
+        }
         this.sender = sender;
         this.text = text;
         this.id= UUID.randomUUID();
     }
 
     public ChatMessage(String sender, String text, MessageStatus status) {
+        if ( sender == null ) {
+            throw new IllegalArgumentException("The sender alias cannot be null");
+        }
         this.sender = sender;
         this.text = text;
         this.id= UUID.randomUUID();
@@ -41,6 +43,10 @@ public class ChatMessage {
     }
 
     public void setSender(String sender) {
+
+        if ( sender == null ) {
+            throw new IllegalArgumentException("The sender alias cannot be null");
+        }
         this.sender = sender;
     }
 

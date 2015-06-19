@@ -54,12 +54,10 @@
        <RelativeLayout
         android:id="@+id/send_msg"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:paddingTop="20dp"
-      >
+        android:layout_alignParentLeft="true">
 
         <EditText
             android:id="@+id/edit_msg"
@@ -70,6 +68,7 @@
             android:textColor="@color/standard_font"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
+            android:layout_marginTop="18dp"
             android:paddingTop="20dp"
             android:paddingLeft="4dp"
             android:textSize="16sp"
@@ -78,7 +77,7 @@
 
         <RelativeLayout
             android:id="@+id/info_new_msg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edit_msg"
             android:background="@color/dark_gray"

@@ -145,20 +145,11 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         {
             Log.d(LOGTAG, "loadTextChatFragment() - mTextChatFragment is null");
             mTextChatFragment = new TextChatFragment();
-            Log.d(LOGTAG, "loadTextChatFragment() - mTextChatFragment after constructor");
+            mTextChatFragment.setMaxTextLength(1050);
+            mTextChatFragment.setTextChatListener(this);
 
             mFragmentTransaction.add(containerId, mTextChatFragment, "TextChatFragment").commit();
-            Log.d(LOGTAG, "loadTextChatFragment() - mTextChatFragment add");
-
-            mTextChatFragment.setTextChatListener(this);
-            mTextChatFragment.setMaxTextLength(1050);
         }
-        else
-        {
-            Log.d(LOGTAG, "loadTextChatFragment() - mTextChatFragment is not null");
-        }
-
-
     }
 
     @Override
@@ -179,10 +170,12 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         if (!connection.getConnectionId().equals(mSession.getConnection().getConnectionId())) {
             //message is from other participant --> the status of the ChatMessage is RECEIVED_MESSAGE.
             //E.g: The alias of the new message received is the value added as connection data.
+            //the sender name (alias) of the message cannot be null.
             msg = new ChatMessage(connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
         }
         else {
             //message is from me --> the status of the ChatMessage is SENT_MESSAGE.
+            //the sender name (alias) of the message cannot be null.
             msg = new ChatMessage("me", data, ChatMessage.MessageStatus.SENT_MESSAGE);
         }
 
