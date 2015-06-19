@@ -1,6 +1,5 @@
 package com.opentok.android.ui.textchat.sample;
 
-import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.content.ServiceConnection;
@@ -17,7 +16,7 @@ import com.opentok.android.Connection;
 import com.opentok.android.OpentokError;
 import com.opentok.android.Session;
 import com.opentok.android.Stream;
-import com.opentok.android.ui.textchat.ChatMessage;
+import com.opentok.android.ui.textchat.widget.ChatMessage;
 import com.opentok.android.ui.textchat.widget.TextChatFragment;
 
 public class TextChatActivity extends FragmentActivity implements Session.SignalListener, Session.SessionListener, TextChatFragment.TextChatListener {
