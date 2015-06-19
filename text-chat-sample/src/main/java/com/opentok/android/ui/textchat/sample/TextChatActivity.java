@@ -52,13 +52,11 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(LOGTAG, "ONCREATE");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_textchat_activity);
 
         mLoadingBar = (ProgressBar) findViewById(R.id.load_spinner);
         mLoadingBar.setVisibility(View.VISIBLE);
-
 
         sessionConnect();
     }
@@ -86,31 +84,24 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
     @Override
     public void onResume() {
         super.onResume();
-
-             if (mSession != null) {
-                mSession.onResume();
-            }
+        if (mSession != null) {
+            mSession.onResume();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-
-        if (isFinishing()) {
-            if (mSession != null) {
-                mSession.disconnect();
-            }
+        if (isFinishing() && mSession != null) {
+            mSession.disconnect();
         }
     }
 
     @Override
     public void onDestroy() {
-
         if (mSession != null) {
             mSession.disconnect();
         }
-
         super.onDestroy();
         finish();
     }
@@ -120,12 +111,10 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         if (mSession != null) {
             mSession.disconnect();
         }
-
         super.onBackPressed();
     }
 
     private void sessionConnect() {
-
         if (mSession == null) {
             mSession = new Session(TextChatActivity.this,
                     API_KEY, SESSION_ID);
@@ -135,15 +124,13 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         }
     }
 
+    // Initialize a TextChatFragment instance and add it to the UI
     private void loadTextChatFragment(){
-
         int containerId = R.id.fragment_textchat_container;
         mFragmentTransaction = getFragmentManager().beginTransaction();
         mTextChatFragment = (TextChatFragment)this.getFragmentManager().findFragmentByTag("TextChatFragment");
 
-        if (mTextChatFragment == null)
-        {
-            Log.d(LOGTAG, "loadTextChatFragment() - mTextChatFragment is null");
+        if (mTextChatFragment == null) {
             mTextChatFragment = new TextChatFragment();
             mTextChatFragment.setMaxTextLength(1050);
             mTextChatFragment.setTextChatListener(this);
@@ -154,38 +141,35 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
 
     @Override
     public boolean onMessageReadyToSend(String msgStr) {
-        Log.d(LOGTAG, "TextChat listener: onMessageReadyToSend: " +msgStr);
+        Log.d(LOGTAG, "TextChat listener: onMessageReadyToSend: " + msgStr);
 
         if (mSession != null) {
             mSession.sendSignal(SIGNAL_TYPE, msgStr);
         }
-        //to indicate to the text-chat component if the message is valid and it is ready to be sent
         return msgError;
     }
 
     @Override
     public void onSignalReceived(Session session, String type, String data, Connection connection) {
-        Log.d(LOGTAG, "onSignalReceived. Type: "+ type + " data: "+data);
+        Log.d(LOGTAG, "onSignalReceived. Type: " + type + " data: " + data);
         ChatMessage msg;
         if (!connection.getConnectionId().equals(mSession.getConnection().getConnectionId())) {
-            //message is from other participant --> the status of the ChatMessage is RECEIVED_MESSAGE.
-            //E.g: The alias of the new message received is the value added as connection data.
-            //the sender name (alias) of the message cannot be null.
+            // The signal was sent from another participant. The sender ID of the
+            // new message received is the value added as connection data.
             msg = new ChatMessage(connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
         }
         else {
-            //message is from me --> the status of the ChatMessage is SENT_MESSAGE.
-            //the sender name (alias) of the message cannot be null.
+            // This signal was sent by this client:
             msg = new ChatMessage("me", data, ChatMessage.MessageStatus.SENT_MESSAGE);
         }
 
-        //Add the new ChatMessage to the text-chat component
+        // Add the new ChatMessage to the text-chat component
         mTextChatFragment.addMessage(msg);
     }
 
     @Override
     public void onConnected(Session session) {
-        Log.d(LOGTAG, "Session is connected");
+        Log.d(LOGTAG, "The session is connected.");
 
         mLoadingBar.setVisibility(View.GONE);
         //loading text-chat ui component
@@ -194,16 +178,15 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
 
     @Override
     public void onDisconnected(Session session) {
-        Log.d(LOGTAG, "Session is disconnected");
+        Log.d(LOGTAG, "The session disconnected.");
     }
 
     @Override
     public void onError(Session session, OpentokError opentokError) {
-        Log.d(LOGTAG, "Session error. OpenTokError: "+opentokError.getErrorCode() + " - "+ opentokError.getMessage());
+        Log.d(LOGTAG, "Session error. OpenTokError: " + opentokError.getErrorCode() + " - " + opentokError.getMessage());
         OpentokError.ErrorCode errorCode = opentokError.getErrorCode();
         msgError = true;
     }
-
 
     @Override
     public void onStreamReceived(Session session, Stream stream) {
@@ -214,5 +197,3 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
     }
 
 }
-
-
