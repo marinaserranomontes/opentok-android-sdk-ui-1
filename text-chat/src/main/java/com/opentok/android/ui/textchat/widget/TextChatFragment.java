@@ -69,6 +69,7 @@ public class TextChatFragment extends Fragment {
         mListView = (ListView) rootView.findViewById(R.id.msgs_list);
         mSendButton = (Button) rootView.findViewById(R.id.send_button);
         mMsgCharsView = (TextView) rootView.findViewById(R.id.characteres_msg);
+        mMsgCharsView.setText(String.valueOf(maxTextLength));
         mMsgNotificationView = (TextView) rootView.findViewById(R.id.new_msg_notification);
         mMsgEditText = (EditText) rootView.findViewById(R.id.edit_msg);
         mMsgDividerView = (View) rootView.findViewById(R.id.divider_notification);

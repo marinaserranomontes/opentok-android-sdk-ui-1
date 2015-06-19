@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="18dp"
+            android:paddingBottom="18dp"
             android:text="bla bla bla bla bla"
             android:textColor="@color/standard_font"
             android:textSize="16sp"
@@ -43,8 +43,10 @@
 
     <ImageView
         android:id="@+id/rectangleView"
-        android:layout_width="12dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/arrow_received"
+        android:visibility="invisible"
         android:layout_alignParentLeft="true"
     />
 

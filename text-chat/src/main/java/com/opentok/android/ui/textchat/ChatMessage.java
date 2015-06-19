@@ -49,6 +49,9 @@ public class ChatMessage {
     * @param text The text of the message.
     */
     public ChatMessage(String sender, String text) {
+        if ( sender == null ) {
+            throw new IllegalArgumentException("The sender alias cannot be null");
+        }
         this.sender = sender;
         this.text = text;
         this.id= UUID.randomUUID();
@@ -65,6 +68,9 @@ public class ChatMessage {
     * @param status Whether the message was sent or received.
     */
     public ChatMessage(String sender, String text, MessageStatus status) {
+        if ( sender == null ) {
+            throw new IllegalArgumentException("The sender alias cannot be null");
+        }
         this.sender = sender;
         this.text = text;
         this.id= UUID.randomUUID();
@@ -82,6 +88,9 @@ public class ChatMessage {
      * Sets the sender identifier of the message.
      */
     public void setSender(String sender) {
+        if ( sender == null ) {
+            throw new IllegalArgumentException("The sender alias cannot be null");
+        }
         this.sender = sender;
     }
 
