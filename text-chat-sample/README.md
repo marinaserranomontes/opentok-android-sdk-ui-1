@@ -111,14 +111,19 @@ the sender of the message) and the text of the message.
 
 The code checks to see if the signal was sent by another client
 (`(!connection.getConnectionId().equals(mSession.getConnection().getConnectionId()))`).
-If it was, it sets the `sender` parameter of the ChatMessage constructor to the first
-five digits of the connection ID for the sender. The second parameter of the constructor
-is the chat message text. The third parameter identifies it as a received message (which
-is reflected in the user interface when the TextChatFragment displays the message):
+If it was, it sets the `sender` parameter of the ChatMessage constructor to the connection
+data you specify when creating the user's token (see
+[Token creation](https://tokbox.com/developer/guides/create-token/) ).. The second parameter of
+the constructor is the chat message text. The third parameter identifies it as a received message
+(which is reflected in the user interface when the TextChatFragment displays the message):
 
 ```java
 msg = new ChatMessage(connection.getConnectionId().substring(1, 5), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
 ```
+
+Note that you could use something other than the connection data to identify the sender
+of a received message. For example, you could embed the user's identification in the
+signal data (perhaps formatting the data as JSON).
 
 If the signal was sent by the local client, the code calls the ChatMessage constructor
 identifying the message as being a sent message:
@@ -134,10 +139,3 @@ which causes the message to be displayed in the message list of the TextChatFrag
 //Add the new ChatMessage to the text-chat component
 mTextChatFragment.addMessage(msg);
 ```
-
-Note that you may want to use something other than the first five digits of the
-connection ID to identify the sender of a received message. You could add the name of the
-user to the connection data you specify when creating the user's token (see
-[Token creation](https://tokbox.com/developer/guides/create-token/) ).
-Or you could embed the user's identification in the signal data (perhaps formatting
-the data as JSON).
