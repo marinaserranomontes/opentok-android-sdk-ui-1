@@ -13,23 +13,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.opentok.android.ui.textchat.R;
-import com.opentok.android.ui.textchat.ChatMessage;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
 * A Fragment for adding and controling text chat user interface.
@@ -111,7 +103,7 @@ public class TextChatFragment extends Fragment {
         public boolean onMessageReadyToSend(String msgStr);
     }
 
-    protected TextChatListener textChatListener;
+    private TextChatListener textChatListener;
 
     /**
      * Set the object that receives events for this TextChatListener.

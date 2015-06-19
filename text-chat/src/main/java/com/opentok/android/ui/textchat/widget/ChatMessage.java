@@ -1,7 +1,5 @@
-package com.opentok.android.ui.textchat;
+package com.opentok.android.ui.textchat.widget;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
 /**
