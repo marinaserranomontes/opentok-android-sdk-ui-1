@@ -100,7 +100,7 @@ public class TextChatFragment extends Fragment {
          * ready to send when the user clicks the Send button in the TextChatFragment
          * user interface.
          */
-        public boolean onMessageReadyToSend(String msgStr);
+        public boolean onMessageReadyToSend(ChatMessage msg);
     }
 
     private TextChatListener textChatListener;
@@ -154,7 +154,8 @@ public class TextChatFragment extends Fragment {
                 showError();
             }
             else {
-                boolean msgError = textChatListener.onMessageReadyToSend(msgStr);
+                ChatMessage myMsg = new ChatMessage("me", msgStr, ChatMessage.MessageStatus.SENT_MESSAGE);
+                boolean msgError = onMessageReadyToSend(myMsg);
 
                 if (msgError) {
                     Log.d(LOG_TAG, "Error to send the message");
@@ -168,7 +169,6 @@ public class TextChatFragment extends Fragment {
                     mListView.smoothScrollToPosition(mMessageAdapter.getCount());
 
                     //add the message to the component
-                    ChatMessage myMsg = new ChatMessage("me", msgStr, ChatMessage.MessageStatus.SENT_MESSAGE);
                     addMessage(myMsg);
                 }
 
@@ -227,11 +227,12 @@ public class TextChatFragment extends Fragment {
      * If you subclass the TextChatFragment class and implement this method,
      * you do not need to set a TextChatListener.
      */
-    protected void onMessageReadyToSend(String msgStr) {
+    protected boolean onMessageReadyToSend(ChatMessage msg) {
         if (this.textChatListener != null) {
             Log.d(LOG_TAG, "onMessageReadyToSend");
-            this.textChatListener.onMessageReadyToSend(msgStr);
+            return this.textChatListener.onMessageReadyToSend(msg);
         }
+        return false;
     }
 
     // Count down the characters left.
