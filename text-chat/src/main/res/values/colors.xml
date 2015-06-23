@@ -6,7 +6,7 @@
     <color name="text">#888888</color>
     <color name="light_gray">#f8f8f8</color>
     <color name="dark_gray">#eeeeee</color>
-    <color name="timestamp">#AAAAAA</color>
+    <color name="info">#AAAAAA</color>
     <color name="edit_text_bkgd">#FFFFFF</color>
     <color name="borders">#d4d3d3</color>
 </resources>

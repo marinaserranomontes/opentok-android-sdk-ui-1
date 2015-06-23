@@ -82,7 +82,7 @@ public class TextChatFragment extends Fragment {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                showNewMsgNotification(false);
+                showMsgNotification(false);
                 mListView.smoothScrollToPosition(mMessageAdapter.getMessagesList().size() - 1);
                 return false;
             }
@@ -100,7 +100,7 @@ public class TextChatFragment extends Fragment {
          * ready to send when the user clicks the Send button in the TextChatFragment
          * user interface.
          */
-        public boolean onMessageReadyToSend(String msgStr);
+        public boolean onMessageReadyToSend(ChatMessage msg);
     }
 
     private TextChatListener textChatListener;
@@ -129,7 +129,9 @@ public class TextChatFragment extends Fragment {
         if (msg != null) {
 
             boolean visible = isNewMessageVisible();
-            showNewMsgNotification(visible);
+            mMsgNotificationView.setTextColor(getResources().getColor(R.color.text));
+            mMsgNotificationView.setText("New messages");
+            showMsgNotification(visible);
 
             //generate message timestamp
             Date date = new Date();
@@ -141,12 +143,41 @@ public class TextChatFragment extends Fragment {
         }
     }
 
-    // To check if the next item is visible or not. Add a notification if it is
-    // not visible, to allow the scroll the ChatMessage list.
-    private void showNewMsgNotification(boolean visible) {
-        mMsgNotificationView.setTextColor(getResources().getColor(R.color.text));
-        mMsgNotificationView.setText("New messages");
+    // Called when the user clicks the send button.
+    private void sendMessage() {
+        //checkMessage
+        mMsgEditText.setEnabled(false);
+        String msgStr = mMsgEditText.getText().toString();
+        if (!msgStr.isEmpty()) {
 
+            if ( msgStr.length() > maxTextLength ) {
+                showError();
+            }
+            else {
+                ChatMessage myMsg = new ChatMessage("me", msgStr, ChatMessage.MessageStatus.SENT_MESSAGE);
+                boolean msgError = onMessageReadyToSend(myMsg);
+
+                if (msgError) {
+                    Log.d(LOG_TAG, "Error to send the message");
+                    showError();
+
+                } else {
+                    mMsgEditText.setEnabled(true);
+                    mMsgEditText.setFocusable(true);
+                    mMsgEditText.setText("");
+                    mMsgCharsView.setTextColor(getResources().getColor(R.color.info));
+                    mListView.smoothScrollToPosition(mMessageAdapter.getCount());
+
+                    //add the message to the component
+                    addMessage(myMsg);
+                }
+
+            }
+
+        }
+    }
+    // Add a notification about a new message
+    private void showMsgNotification(boolean visible) {
         if (visible) {
             mMsgDividerView.setVisibility(View.VISIBLE);
             mMsgNotificationView.setVisibility(View.VISIBLE);
@@ -156,9 +187,8 @@ public class TextChatFragment extends Fragment {
         }
     }
 
-    // To check if the new message is visible in the list
+    // To check if the next item is visible in the list
     private boolean isNewMessageVisible() {
-
         int last = mListView.getLastVisiblePosition();
         int transpose = 0;
         View currentBottomView;
@@ -180,29 +210,13 @@ public class TextChatFragment extends Fragment {
         return false;
     }
 
-    // Called when the user clicks the Send button.
-    private void sendMessage() {
-        //checkMessage
-        mMsgEditText.setEnabled(false);
-        String msgStr = mMsgEditText.getText().toString();
-        if (!msgStr.isEmpty()) {
-            boolean msgError = textChatListener.onMessageReadyToSend(msgStr);
 
-            if (msgError) {
-                Log.d(LOG_TAG, "Error to send the message");
-                mMsgEditText.setEnabled(true);
-                mMsgEditText.setFocusable(true);
-                mMsgNotificationView.setText("Unable to send message. Retry");
-                mMsgNotificationView.setTextColor(Color.RED);
-                mMsgNotificationView.setVisibility(View.VISIBLE);
-
-            } else {
-                mMsgEditText.setEnabled(true);
-                mMsgEditText.setFocusable(true);
-                mMsgEditText.setText("");
-                mListView.smoothScrollToPosition(mMessageAdapter.getCount());
-            }
-        }
+    private void showError() {
+        mMsgEditText.setEnabled(true);
+        mMsgEditText.setFocusable(true);
+        mMsgNotificationView.setText("Unable to send message. Retry");
+        mMsgNotificationView.setTextColor(Color.RED);
+        showMsgNotification(true);
     }
 
     /**
@@ -213,11 +227,12 @@ public class TextChatFragment extends Fragment {
      * If you subclass the TextChatFragment class and implement this method,
      * you do not need to set a TextChatListener.
      */
-    protected void onMessageReadyToSend(String msgStr) {
+    protected boolean onMessageReadyToSend(ChatMessage msg) {
         if (this.textChatListener != null) {
             Log.d(LOG_TAG, "onMessageReadyToSend");
-            this.textChatListener.onMessageReadyToSend(msgStr);
+            return this.textChatListener.onMessageReadyToSend(msg);
         }
+        return false;
     }
 
     // Count down the characters left.

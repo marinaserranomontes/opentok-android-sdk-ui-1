@@ -71,9 +71,9 @@ Send button:
 
 ```java
 @Override
-public boolean onMessageReadyToSend(String msgStr) {
+public boolean onMessageReadyToSend(ChatMessage msg) {
     if (mSession != null) {
-        mSession.sendSignal(SIGNAL_TYPE, msgStr);
+        mSession.sendSignal(SIGNAL_TYPE, msg.getText());
     }
     //to indicate to the text-chat component if the message is valid and it is ready to be sent
     return msgError;
@@ -83,6 +83,14 @@ public boolean onMessageReadyToSend(String msgStr) {
 The app uses the `Session.sendSignal(type, data)` method (defined by the OpenTok
 Android SDK) to send a message to the session. The signal `type` indicates that it is
 a text message. The signal's `data` is set to the text of the message to send.
+
+If the signal was sent by the local client and there is not any error, the text-chat fragment code calls to the ChatMessage constructor
+identifying the message as being a sent message and it calls the `addMessage(msg)` method too.
+
+```java
+msg = new ChatMessage("me", data, ChatMessage.MessageStatus.SENT_MESSAGE);
+```
+
 
 When the session is received, the implementation of the
 `SignalListener.onSignalReceived(session, type, data, connection)` method (defined by the OpenTok
@@ -95,12 +103,8 @@ public void onSignalReceived(Session session, String type, String data, Connecti
     ChatMessage msg;
     if (!connection.getConnectionId().equals(mSession.getConnection().getConnectionId())) {
         msg = new ChatMessage(connection.getConnectionId().substring(1, 5), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
+        mTextChatFragment.addMessage(msg);
     }
-    else {
-        msg = new ChatMessage("me", data, ChatMessage.MessageStatus.SENT_MESSAGE);
-    }
-
-    mTextChatFragment.addMessage(msg);
 }
 ```
 
@@ -118,19 +122,12 @@ the constructor is the chat message text. The third parameter identifies it as a
 (which is reflected in the user interface when the TextChatFragment displays the message):
 
 ```java
-msg = new ChatMessage(connection.getConnectionId().substring(1, 5), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
+msg = new ChatMessage(connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
 ```
 
 Note that you could use something other than the connection data to identify the sender
 of a received message. For example, you could embed the user's identification in the
 signal data (perhaps formatting the data as JSON).
-
-If the signal was sent by the local client, the code calls the ChatMessage constructor
-identifying the message as being a sent message:
-
-```java
-msg = new ChatMessage("me", data, ChatMessage.MessageStatus.SENT_MESSAGE);
-```
 
 Finally, the code calls the `addMessage(msg)` method of the TextChatFragment instance,
 which causes the message to be displayed in the message list of the TextChatFragment view:

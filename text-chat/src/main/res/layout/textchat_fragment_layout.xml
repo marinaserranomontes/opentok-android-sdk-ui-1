@@ -41,7 +41,7 @@
         android:textColor="@color/text"
         android:textSize="12sp"
         android:visibility="gone"
-        android:background="@color/light_gray"
+        android:background="@color/dark_gray"
       />
 
     <View
@@ -51,7 +51,7 @@
         android:layout_above="@+id/send_msg"
         android:background="@color/dividers" />
 
-       <RelativeLayout
+    <RelativeLayout
         android:id="@+id/send_msg"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="@color/timestamp"
+                android:textColor="@color/info"
                 android:text="1000"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
