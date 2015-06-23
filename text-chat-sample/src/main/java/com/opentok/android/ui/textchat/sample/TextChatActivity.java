@@ -131,7 +131,7 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
 
         if (mTextChatFragment == null) {
             mTextChatFragment = new TextChatFragment();
-            mTextChatFragment.setMaxTextLength(10);
+            mTextChatFragment.setMaxTextLength(1050);
             mTextChatFragment.setTextChatListener(this);
 
             mFragmentTransaction.add(containerId, mTextChatFragment, "TextChatFragment").commit();
