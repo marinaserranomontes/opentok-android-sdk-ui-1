@@ -8,5 +8,5 @@ Use this to build a text chat interface. See the following directories:
 
 * text-chat-docs -- API reference for the OpenTok Android Text Chat UI widget.
 
-* text-chat-docs-sample -- Sample code for the OpenTok Android Text Chat UI widget.
+* text-chat-sample -- Sample code for the OpenTok Android Text Chat UI widget.
   See the README.md file in this directory for documentation.
