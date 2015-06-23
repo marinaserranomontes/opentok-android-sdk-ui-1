@@ -131,7 +131,7 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
 
         if (mTextChatFragment == null) {
             mTextChatFragment = new TextChatFragment();
-            mTextChatFragment.setMaxTextLength(1050);
+            mTextChatFragment.setMaxTextLength(10);
             mTextChatFragment.setTextChatListener(this);
 
             mFragmentTransaction.add(containerId, mTextChatFragment, "TextChatFragment").commit();
@@ -151,19 +151,14 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
     @Override
     public void onSignalReceived(Session session, String type, String data, Connection connection) {
         Log.d(LOGTAG, "onSignalReceived. Type: " + type + " data: " + data);
-        ChatMessage msg;
+        ChatMessage msg = null;
         if (!connection.getConnectionId().equals(mSession.getConnection().getConnectionId())) {
             // The signal was sent from another participant. The sender ID of the
             // new message received is the value added as connection data.
             msg = new ChatMessage(connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
+            // Add the new ChatMessage to the text-chat component
+            mTextChatFragment.addMessage(msg);
         }
-        else {
-            // This signal was sent by this client:
-            msg = new ChatMessage("me", data, ChatMessage.MessageStatus.SENT_MESSAGE);
-        }
-
-        // Add the new ChatMessage to the text-chat component
-        mTextChatFragment.addMessage(msg);
     }
 
     @Override
