@@ -175,6 +175,9 @@ public class TextChatFragment extends Fragment {
             }
 
         }
+        else{
+            mMsgEditText.setEnabled(true);
+        }
     }
     // Add a notification about a new message
     private void showMsgNotification(boolean visible) {

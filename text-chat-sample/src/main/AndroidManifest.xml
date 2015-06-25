@@ -17,7 +17,8 @@
         android:name="com.opentok.android.ui.textchat.sample.TextChatActivity"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:label="@string/app_name"
-        android:screenOrientation="fullSensor" >
+        android:screenOrientation="fullSensor"
+        android:windowSoftInputMode="adjustResize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

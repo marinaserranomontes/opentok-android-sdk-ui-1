@@ -141,8 +141,9 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
     @Override
     public boolean onMessageReadyToSend(ChatMessage msg) {
         Log.d(LOGTAG, "TextChat listener: onMessageReadyToSend: " + msg.getText());
-        msg.setSender(mSession.getConnection().getData());
+
         if (mSession != null) {
+            msg.setSender(mSession.getConnection().getData());
             mSession.sendSignal(SIGNAL_TYPE, msg.getText());
         }
         return msgError;
@@ -154,7 +155,8 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         ChatMessage msg = null;
         if (!connection.getConnectionId().equals(mSession.getConnection().getConnectionId())) {
             // The signal was sent from another participant. The sender ID of the
-            // new message received is the value added as connection data.
+            // new message received is the value added as connection data, which
+            // comes from the Token generated from the server.
             msg = new ChatMessage(connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
             // Add the new ChatMessage to the text-chat component
             mTextChatFragment.addMessage(msg);
