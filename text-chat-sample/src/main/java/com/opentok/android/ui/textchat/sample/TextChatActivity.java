@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.opentok.android.Connection;
+import com.opentok.android.OpenTokConfig;
 import com.opentok.android.OpentokError;
 import com.opentok.android.Session;
 import com.opentok.android.Stream;
@@ -58,6 +59,9 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         mLoadingBar.setVisibility(View.VISIBLE);
 
         sessionConnect();
+
+        OpenTokConfig.setJNILogs(true);
+        OpenTokConfig.setOTKitLogs(true);
     }
 
     @Override
