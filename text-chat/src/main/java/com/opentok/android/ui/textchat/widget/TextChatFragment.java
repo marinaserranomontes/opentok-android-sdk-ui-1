@@ -1,6 +1,7 @@
 package com.opentok.android.ui.textchat.widget;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -44,6 +45,8 @@ public class TextChatFragment extends Fragment {
     private View mMsgDividerView;
 
     private int maxTextLength = 1000; // by default the maximum length is 1000.
+
+    private boolean loggingTextChat = false;
 
     @Override
     public void onAttach(Activity activity) {
@@ -167,6 +170,15 @@ public class TextChatFragment extends Fragment {
                     mMsgEditText.setText("");
                     mMsgCharsView.setTextColor(getResources().getColor(R.color.info));
                     mListView.smoothScrollToPosition(mMessageAdapter.getCount());
+
+                    if ( !loggingTextChat ) {
+                        //register text-chat usage
+                        Intent intent = new Intent();
+                        intent.setAction("com.opentok.log.event");
+                        intent.putExtra("event", "TextChat");
+                        mContext.sendBroadcast(intent);
+                        loggingTextChat = true;
+                    }
 
                     //add the message to the component
                     addMessage(myMsg);
