@@ -172,9 +172,10 @@ public class TextChatFragment extends Fragment {
                     mListView.smoothScrollToPosition(mMessageAdapter.getCount());
 
                     if ( !loggingTextChat ) {
+                        Log.d(LOG_TAG, "Logging text-chat usage");
                         //register text-chat usage
                         Intent intent = new Intent();
-                        intent.setAction("com.opentok.log.event");
+                        intent.setAction("com.opentok.android.log.event");
                         intent.putExtra("event", "TextChat");
                         mContext.sendBroadcast(intent);
                         loggingTextChat = true;
