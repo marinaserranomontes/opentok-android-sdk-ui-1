@@ -46,8 +46,6 @@ public class TextChatFragment extends Fragment {
 
     private int maxTextLength = 1000; // by default the maximum length is 1000.
 
-    private boolean loggingTextChat = false;
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -170,16 +168,6 @@ public class TextChatFragment extends Fragment {
                     mMsgEditText.setText("");
                     mMsgCharsView.setTextColor(getResources().getColor(R.color.info));
                     mListView.smoothScrollToPosition(mMessageAdapter.getCount());
-
-                    if ( !loggingTextChat ) {
-                        Log.d(LOG_TAG, "Logging text-chat usage");
-                        //register text-chat usage
-                        Intent intent = new Intent();
-                        intent.setAction("com.opentok.android.log.event");
-                        intent.putExtra("event", "TextChat");
-                        mContext.sendBroadcast(intent);
-                        loggingTextChat = true;
-                    }
 
                     //add the message to the component
                     addMessage(myMsg);
