@@ -1,7 +1,5 @@
 package com.opentok.android.ui.textchat.widget;
 
-import android.util.Log;
-
 import java.util.UUID;
 
 /**
