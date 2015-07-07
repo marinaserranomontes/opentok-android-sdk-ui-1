@@ -50,6 +50,12 @@ public class TextChatFragment extends Fragment {
     private String senderId;
     private String senderAlias;
 
+    public TextChatFragment() {
+        //Init the sender information for the output messages
+        this.senderId = UUID.randomUUID().toString();
+        this.senderAlias = "me";
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -154,14 +160,7 @@ public class TextChatFragment extends Fragment {
             mMessageAdapter.add(msg);
         }
     }
-    private void checkSenderInfo(){
-        if ( senderId == null ) {
-            senderId = UUID.randomUUID().toString();
-        }
-        if ( senderAlias == null ) {
-            senderId = "me";
-        }
-    }
+
     // Called when the user clicks the send button.
     private void sendMessage() {
         //checkMessage
@@ -173,7 +172,6 @@ public class TextChatFragment extends Fragment {
                 showError();
             }
             else {
-                checkSenderInfo();
                 ChatMessage myMsg = new ChatMessage(senderId, senderAlias, msgStr, ChatMessage.MessageStatus.SENT_MESSAGE);
                 boolean msgError = onMessageReadyToSend(myMsg);
 
