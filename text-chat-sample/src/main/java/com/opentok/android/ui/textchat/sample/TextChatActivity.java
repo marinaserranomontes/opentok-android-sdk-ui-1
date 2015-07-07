@@ -133,6 +133,12 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
             mTextChatFragment = new TextChatFragment();
             mTextChatFragment.setMaxTextLength(1050);
             mTextChatFragment.setTextChatListener(this);
+            //Setting the sender information for the output messages
+            // The sender alias of the
+            // new message sent is the value added as connection data, which
+            // comes from the Token generated from the server.
+            // And the sender id is the value added as connectionId.
+            mTextChatFragment.setSenderInfo(mSession.getConnection().getConnectionId(), mSession.getConnection().getData());
 
             mFragmentTransaction.add(containerId, mTextChatFragment, "TextChatFragment").commit();
         }
@@ -144,8 +150,6 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
 
         if (mSession != null) {
             //Setting the sender info of the message.
-            msg.setSenderId(mSession.getConnection().getConnectionId());
-            msg.setSender(mSession.getConnection().getData());
             mSession.sendSignal(SIGNAL_TYPE, msg.getText());
         }
         return msgError;
