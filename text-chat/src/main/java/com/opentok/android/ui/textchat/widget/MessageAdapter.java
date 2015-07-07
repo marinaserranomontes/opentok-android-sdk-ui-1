@@ -83,7 +83,7 @@ class MessageAdapter extends ArrayAdapter<ChatMessage> {
         if (myList.size() > 1 && position > 0) {
             lastMsg = messagesList.get(position - 1);
             currentMsg = messagesList.get(position);
-            if (lastMsg != null && currentMsg != null && lastMsg.getSender().equals(currentMsg.getSender()) && lastMsg.getStatus().equals(currentMsg.getStatus())) {
+            if (lastMsg != null && currentMsg != null && lastMsg.getSenderId().equals(currentMsg.getSenderId())) {
                 //check time
                 if (checkTimeMsg(lastMsg.getTimestamp(), currentMsg.getTimestamp())) {
                     return true;

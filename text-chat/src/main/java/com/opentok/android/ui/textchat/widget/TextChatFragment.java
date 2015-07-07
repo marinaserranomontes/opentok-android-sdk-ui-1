@@ -155,7 +155,7 @@ public class TextChatFragment extends Fragment {
                 showError();
             }
             else {
-                ChatMessage myMsg = new ChatMessage("me", msgStr, ChatMessage.MessageStatus.SENT_MESSAGE);
+                ChatMessage myMsg = new ChatMessage("meId","me", msgStr, ChatMessage.MessageStatus.SENT_MESSAGE);
                 boolean msgError = onMessageReadyToSend(myMsg);
 
                 if (msgError) {

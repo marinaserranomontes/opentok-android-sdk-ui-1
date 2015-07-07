@@ -143,6 +143,8 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         Log.d(LOGTAG, "TextChat listener: onMessageReadyToSend: " + msg.getText());
 
         if (mSession != null) {
+            //Setting the sender info of the message.
+            msg.setSenderId(mSession.getConnection().getConnectionId());
             msg.setSender(mSession.getConnection().getData());
             mSession.sendSignal(SIGNAL_TYPE, msg.getText());
         }
@@ -154,10 +156,12 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
         Log.d(LOGTAG, "onSignalReceived. Type: " + type + " data: " + data);
         ChatMessage msg = null;
         if (!connection.getConnectionId().equals(mSession.getConnection().getConnectionId())) {
-            // The signal was sent from another participant. The sender ID of the
+            // The signal was sent from another participant. The sender alias of the
             // new message received is the value added as connection data, which
             // comes from the Token generated from the server.
-            msg = new ChatMessage(connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
+            // And the sender id is the value added as connectionId.
+            //The sender id will be used to group messages.
+            msg = new ChatMessage(connection.getConnectionId(), connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
             // Add the new ChatMessage to the text-chat component
             mTextChatFragment.addMessage(msg);
         }
