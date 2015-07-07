@@ -23,6 +23,7 @@ public class ChatMessage {
         RECEIVED_MESSAGE
     }
 
+    protected String senderId;
     protected String sender;
     protected String text;
     protected long timestamp;
@@ -30,49 +31,57 @@ public class ChatMessage {
     private UUID id;
 
     /**
-    * Construct a chat message that includes only a message string.
-    *
-    * @param text The text of the message.
-    */
-    public ChatMessage(String text) {
-        this.text = text;
-        this.id= UUID.randomUUID();
-    }
-
-    /**
     * Construct a chat message that includes a message string and a sender identifier.
+    * @param senderId The string identifying the sender id of the message
     *
     * @param sender The string identifying the sender of the message.
     *
     * @param text The text of the message.
     */
-    public ChatMessage(String sender, String text) {
-        if ( sender == null ) {
-            throw new IllegalArgumentException("The sender alias cannot be null");
+    public ChatMessage(String senderId, String sender, String text) {
+        if ( sender == null || senderId == null ) {
+            throw new IllegalArgumentException("The sender alias and the sender id cannot be null");
         }
+        this.senderId = senderId;
         this.sender = sender;
         this.text = text;
-        this.id= UUID.randomUUID();
+        this.id = UUID.randomUUID();
     }
 
     /**
     * Construct a chat message that includes a message string, a sender identifier,
     * and the sent/recieved status.
+    * @param senderId The string identifying the sender id of the message.
     *
-    * @param sender The string identifying the sender of the message.
+    * @param sender The string identifying the sender alias of the message.
     *
     * @param text The text of the message.
     *
     * @param status Whether the message was sent or received.
     */
-    public ChatMessage(String sender, String text, MessageStatus status) {
-        if ( sender == null ) {
-            throw new IllegalArgumentException("The sender alias cannot be null");
+    public ChatMessage(String senderId, String sender, String text, MessageStatus status) {
+        if ( sender == null || senderId == null) {
+            throw new IllegalArgumentException("The sender alias and the sender id cannot be null");
         }
+        this.senderId = senderId;
         this.sender = sender;
         this.text = text;
         this.id= UUID.randomUUID();
         this.status = status;
+    }
+
+    /**
+     * Returns the unique id of the sender.
+     */
+    public String getSenderId() {
+        return senderId;
+    }
+
+    /**
+     * Sets the unique id of the sender.
+     */
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
     /**

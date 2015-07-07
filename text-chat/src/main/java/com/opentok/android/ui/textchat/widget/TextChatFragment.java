@@ -23,6 +23,7 @@ import com.opentok.android.ui.textchat.R;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 /**
 * A Fragment for adding and controling text chat user interface.
@@ -45,6 +46,15 @@ public class TextChatFragment extends Fragment {
     private View mMsgDividerView;
 
     private int maxTextLength = 1000; // by default the maximum length is 1000.
+
+    private String senderId;
+    private String senderAlias;
+
+    public TextChatFragment() {
+        //Init the sender information for the output messages
+        this.senderId = UUID.randomUUID().toString();
+        this.senderAlias = "me";
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -121,6 +131,16 @@ public class TextChatFragment extends Fragment {
     }
 
     /**
+     * Set the sender alias and the sender id of the output messages.
+     */
+    public void setSenderInfo(String senderId, String senderAlias) {
+        if ( senderAlias == null || senderId == null ) {
+            throw new IllegalArgumentException("The sender alias and the sender id cannot be null");
+        }
+        this.senderAlias = senderAlias;
+        this.senderId = senderId;
+    }
+    /**
      * Add a message to the TextChatListener received message list.
      */
     public void addMessage(ChatMessage msg) {
@@ -155,7 +175,7 @@ public class TextChatFragment extends Fragment {
                 showError();
             }
             else {
-                ChatMessage myMsg = new ChatMessage("me", msgStr, ChatMessage.MessageStatus.SENT_MESSAGE);
+                ChatMessage myMsg = new ChatMessage(senderId, senderAlias, msgStr, ChatMessage.MessageStatus.SENT_MESSAGE);
                 boolean msgError = onMessageReadyToSend(myMsg);
 
                 if (msgError) {
