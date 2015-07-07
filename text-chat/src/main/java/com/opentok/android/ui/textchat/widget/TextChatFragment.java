@@ -134,6 +134,9 @@ public class TextChatFragment extends Fragment {
      * Set the sender alias and the sender id of the output messages.
      */
     public void setSenderInfo(String senderId, String senderAlias) {
+        if ( senderAlias == null || senderId == null ) {
+            throw new IllegalArgumentException("The sender alias and the sender id cannot be null");
+        }
         this.senderAlias = senderAlias;
         this.senderId = senderId;
     }
