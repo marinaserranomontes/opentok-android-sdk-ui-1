@@ -133,11 +133,6 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
             mTextChatFragment = new TextChatFragment();
             mTextChatFragment.setMaxTextLength(1050);
             mTextChatFragment.setTextChatListener(this);
-            //Setting the sender information for the output messages
-            // The sender alias of the
-            // new message sent is the value added as connection data, which
-            // comes from the Token generated from the server.
-            // And the sender id is the value added as connectionId.
             mTextChatFragment.setSenderInfo(mSession.getConnection().getConnectionId(), mSession.getConnection().getData());
 
             mFragmentTransaction.add(containerId, mTextChatFragment, "TextChatFragment").commit();
@@ -159,12 +154,9 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
     public void onSignalReceived(Session session, String type, String data, Connection connection) {
         Log.d(LOGTAG, "onSignalReceived. Type: " + type + " data: " + data);
         ChatMessage msg = null;
-        if (!connection.getConnectionId().equals(mSession.getConnection().getConnectionId())) {
-            // The signal was sent from another participant. The sender alias of the
-            // new message received is the value added as connection data, which
-            // comes from the Token generated from the server.
-            // And the sender id is the value added as connectionId.
-            //The sender id will be used to group messages.
+            // The signal was sent from another participant. The sender ID is set to the sender's
+            // connection ID. The sender alias is the value added as connection data when you
+            // created the user's token.
             msg = new ChatMessage(connection.getConnectionId(), connection.getData(), data);
             // Add the new ChatMessage to the text-chat component
             mTextChatFragment.addMessage(msg);

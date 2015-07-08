@@ -131,7 +131,7 @@ public class TextChatFragment extends Fragment {
     }
 
     /**
-     * Set the sender alias and the sender id of the output messages.
+     * Set the sender alias and the sender ID of the output messages.
      */
     public void setSenderInfo(String senderId, String senderAlias) {
         if ( senderAlias == null || senderId == null ) {
