@@ -1,12 +1,19 @@
-# opentok-android-sdk-ui
-Source code for UI widgets to help in building OpenTok apps for Android.
+# OpenTok Android SDK UI
 
-Currently, this repo contains one UI widget -- the OpenTok Android Text Chat UI widget.
-Use this to build a text chat interface. See the following directories:
+UI widgets to help in building OpenTok-powered apps for Android.
 
-* text-chat -- Source code for the OpenTok Android Text Chat UI widget.
+Currently, this repo contains one UI widget: 
 
-* text-chat-docs -- API reference for the OpenTok Android Text Chat UI widget.
+## OpenTok Android Text Chat Widget ##
+Use this to build a text chat interface. 
 
-* text-chat-sample -- Sample code for the OpenTok Android Text Chat UI widget.
-  See the README.md file in this directory for documentation.
+Learn how to add the Text Chat widget to your Android application [here](/text-chat-sample/README.md).
+
+If you're interested to learn more about Text Chat:
+
+* [Sample App](/text-chat-sample/) -- Sample Android App using the OpenTok Android Text Chat widget.
+  See the [README.md file](/text-chat-sample/README.md) for documentation.
+
+* [Documentation](/text-chat-docs/) -- API reference for the OpenTok Android Text Chat widget.
+
+* [Source code](/text-chat/) -- Source code for the OpenTok Android Text Chat widget.
