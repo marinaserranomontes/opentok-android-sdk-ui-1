@@ -145,7 +145,7 @@ class MessageAdapter extends ArrayAdapter<ChatMessage> {
         }
         if (holder.viewType != VIEW_TYPE_ROW_RECEIVED_GROUP && holder.viewType != VIEW_TYPE_ROW_SENT_GROUP) {
             //msg alias
-            holder.aliasText.setText(message.getSender());
+            holder.aliasText.setText(message.getSenderAlias());
 
             //msg time
             SimpleDateFormat ft =

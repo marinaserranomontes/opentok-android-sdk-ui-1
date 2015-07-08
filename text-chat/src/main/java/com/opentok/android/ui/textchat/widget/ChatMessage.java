@@ -87,7 +87,7 @@ public class ChatMessage {
     /**
      * Returns the sender identifier of the message.
      */
-    public String getSenderAliaS() {
+    public String getSenderAlias() {
         return senderAlias;
     }
 
