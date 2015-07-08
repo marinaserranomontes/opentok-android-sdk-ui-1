@@ -145,9 +145,13 @@ public class TextChatFragment extends Fragment {
      */
     public void addMessage(ChatMessage msg) {
         Log.i(LOG_TAG, "New message " + msg.getText() + " is ready to be added.");
-        boolean messageGroup = false;
-
+       
         if (msg != null) {
+
+            //check the origin of the message
+            if ( msg.getSenderId() != this.senderId ){
+                msg.setStatus(ChatMessage.MessageStatus.RECEIVED_MESSAGE);
+            }
 
             boolean visible = isNewMessageVisible();
             mMsgNotificationView.setTextColor(getResources().getColor(R.color.text));

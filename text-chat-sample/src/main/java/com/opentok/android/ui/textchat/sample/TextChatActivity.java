@@ -165,7 +165,7 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
             // comes from the Token generated from the server.
             // And the sender id is the value added as connectionId.
             //The sender id will be used to group messages.
-            msg = new ChatMessage(connection.getConnectionId(), connection.getData(), data, ChatMessage.MessageStatus.RECEIVED_MESSAGE);
+            msg = new ChatMessage(connection.getConnectionId(), connection.getData(), data);
             // Add the new ChatMessage to the text-chat component
             mTextChatFragment.addMessage(msg);
         }

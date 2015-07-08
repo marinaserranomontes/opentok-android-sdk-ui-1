@@ -24,7 +24,7 @@ public class ChatMessage {
     }
 
     protected String senderId;
-    protected String sender;
+    protected String senderAlias;
     protected String text;
     protected long timestamp;
     protected MessageStatus status;
@@ -34,16 +34,16 @@ public class ChatMessage {
     * Construct a chat message that includes a message string and a sender identifier.
     * @param senderId The string identifying the sender id of the message
     *
-    * @param sender The string identifying the sender of the message.
+    * @param senderAlias The string identifying the sender of the message.
     *
     * @param text The text of the message.
     */
-    public ChatMessage(String senderId, String sender, String text) {
-        if ( sender == null || senderId == null ) {
+    public ChatMessage(String senderId, String senderAlias, String text) {
+        if ( senderAlias == null || senderId == null ) {
             throw new IllegalArgumentException("The sender alias and the sender id cannot be null");
         }
         this.senderId = senderId;
-        this.sender = sender;
+        this.senderAlias = senderAlias;
         this.text = text;
         this.id = UUID.randomUUID();
     }
@@ -64,7 +64,7 @@ public class ChatMessage {
             throw new IllegalArgumentException("The sender alias and the sender id cannot be null");
         }
         this.senderId = senderId;
-        this.sender = sender;
+        this.senderAlias = sender;
         this.text = text;
         this.id= UUID.randomUUID();
         this.status = status;
@@ -87,8 +87,8 @@ public class ChatMessage {
     /**
      * Returns the sender identifier of the message.
      */
-    public String getSender() {
-        return sender;
+    public String getSenderAlias() {
+        return senderAlias;
     }
 
     /**
@@ -98,7 +98,7 @@ public class ChatMessage {
         if ( sender == null ) {
             throw new IllegalArgumentException("The sender alias cannot be null");
         }
-        this.sender = sender;
+        this.senderAlias = senderAlias;
     }
 
     /**
