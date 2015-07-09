@@ -59,7 +59,7 @@ public class ChatMessage {
     *
     * @param status Whether the message was sent or received.
     */
-    public ChatMessage(String senderId, String sender, String text, MessageStatus status) {
+    protected ChatMessage(String senderId, String sender, String text, MessageStatus status) {
         if ( sender == null || senderId == null) {
             throw new IllegalArgumentException("The sender alias and the sender id cannot be null");
         }
