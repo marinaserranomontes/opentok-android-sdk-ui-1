@@ -160,8 +160,8 @@ public class TextChatActivity extends FragmentActivity implements Session.Signal
             msg = new ChatMessage(connection.getConnectionId(), connection.getData(), data);
             // Add the new ChatMessage to the text-chat component
             mTextChatFragment.addMessage(msg);
-        }
     }
+
 
     @Override
     public void onConnected(Session session) {
