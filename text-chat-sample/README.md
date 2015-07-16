@@ -15,7 +15,12 @@ A basic sample app showing the use of the OpenTok Android Text Chat UI sample
 4. Locate the armeabi and x86 directories in the OpenTok/libs directory of the OpenTok
    Android SDK, and drag them into the app/jniLibs directory of the project.
 
-5. In the com.opentok.android.ui.textchat.sample.TextChatActivity.java class, set the following
+5. Add the opentok-android-sdk-ui.aar file to the app/libs directory of the project.
+
+   The opentok-android-sdk-ui.aar file os available an the [opentok-android-sdk-ui
+   Releases](https://github.com/opentok/opentok-android-sdk-ui/releases) page.
+
+6. In the com.opentok.android.ui.textchat.sample.TextChatActivity.java class, set the following
    properties to a test OpenTok session ID, token, and API key:
 
    ```
@@ -29,13 +34,12 @@ A basic sample app showing the use of the OpenTok Android Text Chat UI sample
    in the text chat user interface. For more information, see
    [Connection data](https://tokbox.com/developer/guides/create-token/#connection-data).
 
-
    You can get a test OpenTok session ID, a test token, and your OpenTok API key at the
    [OpenTok dashboard](https://dashboard.tokbox.com/). However, in a final application,
    you must use the OpenTok server SDKs to generate a unique token for each user. See
    the [Token creation overview](https://tokbox.com/developer/guides/create-token/).
 
-6. Debug the project on a supported device.
+7. Debug the project on a supported device.
 
    For a list of supported devices, see the "Developer and client requirements"
    on [this page](https://tokbox.com/developer/sdks/android/).
