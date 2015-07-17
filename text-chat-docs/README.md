@@ -1,4 +1,4 @@
-OpenTok Android text chat widget
+OpenTok Android Text Chat widget
 ================================
 
 The OpenTok Android Text Chat widget provides code for adding a user interface component
@@ -8,14 +8,14 @@ The OpenTok Android Text Chat widget API is included in the opentok-android-sdk-
 file, available an the [opentok-android-sdk-ui
 Releases](https://github.com/opentok/opentok-android-sdk-ui/releases) page.
 
-The text-chat-sample directory in this repo used the text chat widget the [OpenTok signaling 
+The text-chat-sample directory in this repo uses the Text Chat widget the [OpenTok signaling 
 API](https://tokbox.com/developer/guides/signaling/android/) to provide text chat in an
 OpenTok session.
 
-## Using the text chat widget
+## Using the Text Chat widget
 
 The com.opentok.android.ui.textchat.widget package includes the classes and interfaces
-that define the text chat widget API.
+that define the OpenTok Android Text Chat widget API.
 
 The TextChatFragment class defines an Android Fragment for adding and controling the text chat
 user interface:
@@ -26,9 +26,8 @@ user interface:
 * It includes a TextChatListener interface and an `onMessageReadyToSend(msg)` method
   you can implent to receive events when the user clicks the Send button (to send a message).
 
-* It includes an `addMessage(ChatMessage msg)` method you call to add new received messages
-  to the message list The ChatMessage class defines a message that can be displayed in the message
-  list.
+* It includes an `addMessage(msg)` method you call to add new received messages
+  to the message list. The ChatMessage class defines the message.
 
 The following sections provide details.
 
@@ -133,7 +132,7 @@ The `ChatMessage()` constructor has three parameters:
   matches the sender ID for the local client, the TextChatFragment object display's the
   message as a sent message in the message list. Otherwise, it displays it as a received
   message. (See the discussion of the `TextChatFragment.setSenderInfo()` method in
-  "Instantiating and configuring the text chat fragment".)
+  "Instantiating and configuring the text chat fragment.")
 
 * `senderAlias` (String) - The name of the sender of the message to display in the message list.
 

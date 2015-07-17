@@ -1,10 +1,14 @@
-# OpenTok Android SDK UI
+# OpenTok Android SDK UI library
 
 UI widgets to help in building OpenTok-powered apps for Android.
 
-Currently, this repo contains one UI widget:
+Currently, this repo contains one UI widget: the OpenTok Android Text Chat widget.
 
-## OpenTok Android text chat widget ##
+You can download the latest build of the opentok-android-sdk-ui.aar file from the
+[opentok-android-sdk-ui Releases](https://github.com/opentok/opentok-android-sdk-ui/releases) page.
+
+
+## OpenTok Android Text Chat widget ##
 
 Use this to build a text chat interface. For more information, see:
 

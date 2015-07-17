@@ -9,6 +9,8 @@ A basic sample app showing the use of the OpenTok Android Text Chat UI sample
 
 2. Download the [OpenTok Android SDK](https://tokbox.com/opentok/libraries/client/android/).
 
+   This application requires version 2.6.0+ of the OpenTok Android SDK.
+
 3. Locate the opentok-android-sdk-2.x.x.jar file in the OpenTok/libs directory of the OpenTok
    Android SDK, and drag it into the app/libs directory of the project.
 
@@ -123,13 +125,20 @@ TextChatFragement instance. A ChatMessage instance has a sender (a string that i
 the sender of the message) and the text of the message.
 
 The code checks to see if the signal was sent by another client
-(`(!connection.getConnectionId().equals(mSession.getConnection().getConnectionId()))`).
-If it was, it sets the `senderId` parameter of the ChatMessage constructor to the connection
-data you specify when creating the user's token (see
-[Token creation](https://tokbox.com/developer/guides/create-token/) ). The second parameter of
-the constructor is the alais, which identifies the user who sent the message. In this app, the
-alias is set as the connection data when you create a token for each user. The third parameter of 
-the constructor is the chat message text:
+(`(!connection.getConnectionId().equals(mSession.getConnection().getConnectionId()))`). (Signals
+sent by the local client are automatically displayed by when the user clicks the Send button in the
+TextChatFragment.)
+
+The code sets the `senderId` parameter of the ChatMessage constructor to the connection ID
+(a unique idendifier for the sender). The TextChatFragment uses the sender ID to group messages
+sent by the same sender together.
+
+The second parameter of the constructor is the sender alais, which the TextChatFragment uses as
+the name of the sender in the message list. In this app, the alias is set as the connection data
+when you create a token for each user (see [Token
+creation](https://tokbox.com/developer/guides/create-token/) ).
+
+The third parameter of the constructor is the chat message text:
 
 ```java
 msg = new ChatMessage(connection.getConnectionId(), connection.getData(), data);
