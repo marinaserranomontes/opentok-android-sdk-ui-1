@@ -9,6 +9,9 @@ Use this to build a text chat interface.
 
 Learn how to add the Text Chat widget to your Android application [here](/text-chat-sample/README.md).
 
+Feel free to provide any feedback or ask questions at text-chat-beta@tokbox.com.
+
+
 If you're interested to learn more about Text Chat:
 
 * [Sample App](/text-chat-sample/) -- Sample Android App using the OpenTok Android Text Chat widget.
