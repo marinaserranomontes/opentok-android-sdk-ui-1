@@ -9,13 +9,20 @@ A basic sample app showing the use of the OpenTok Android Text Chat UI sample
 
 2. Download the [OpenTok Android SDK](https://tokbox.com/opentok/libraries/client/android/).
 
+   This application requires version 2.6.0+ of the OpenTok Android SDK.
+
 3. Locate the opentok-android-sdk-2.x.x.jar file in the OpenTok/libs directory of the OpenTok
    Android SDK, and drag it into the app/libs directory of the project.
 
 4. Locate the armeabi and x86 directories in the OpenTok/libs directory of the OpenTok
    Android SDK, and drag them into the app/jniLibs directory of the project.
 
-5. In the com.opentok.android.ui.textchat.sample.TextChatActivity.java class, set the following
+5. Add the opentok-android-sdk-ui.aar file to the app/libs directory of the project.
+
+   The opentok-android-sdk-ui.aar file os available an the [opentok-android-sdk-ui
+   Releases](https://github.com/opentok/opentok-android-sdk-ui/releases) page.
+
+6. In the com.opentok.android.ui.textchat.sample.TextChatActivity.java class, set the following
    properties to a test OpenTok session ID, token, and API key:
 
    ```
@@ -29,13 +36,12 @@ A basic sample app showing the use of the OpenTok Android Text Chat UI sample
    in the text chat user interface. For more information, see
    [Connection data](https://tokbox.com/developer/guides/create-token/#connection-data).
 
-
    You can get a test OpenTok session ID, a test token, and your OpenTok API key at the
    [OpenTok dashboard](https://dashboard.tokbox.com/). However, in a final application,
    you must use the OpenTok server SDKs to generate a unique token for each user. See
    the [Token creation overview](https://tokbox.com/developer/guides/create-token/).
 
-6. Debug the project on a supported device.
+7. Debug the project on a supported device.
 
    For a list of supported devices, see the "Developer and client requirements"
    on [this page](https://tokbox.com/developer/sdks/android/).
@@ -119,13 +125,20 @@ TextChatFragement instance. A ChatMessage instance has a sender (a string that i
 the sender of the message) and the text of the message.
 
 The code checks to see if the signal was sent by another client
-(`(!connection.getConnectionId().equals(mSession.getConnection().getConnectionId()))`).
-If it was, it sets the `senderId` parameter of the ChatMessage constructor to the connection
-data you specify when creating the user's token (see
-[Token creation](https://tokbox.com/developer/guides/create-token/) ). The second parameter of
-the constructor is the alais, which identifies the user who sent the message. In this app, the
-alias is set as the connection data when you create a token for each user. The third parameter of 
-the constructor is the chat message text:
+(`(!connection.getConnectionId().equals(mSession.getConnection().getConnectionId()))`). (Signals
+sent by the local client are automatically displayed by when the user clicks the Send button in the
+TextChatFragment.)
+
+The code sets the `senderId` parameter of the ChatMessage constructor to the connection ID
+(a unique idendifier for the sender). The TextChatFragment uses the sender ID to group messages
+sent by the same sender together.
+
+The second parameter of the constructor is the sender alais, which the TextChatFragment uses as
+the name of the sender in the message list. In this app, the alias is set as the connection data
+when you create a token for each user (see [Token
+creation](https://tokbox.com/developer/guides/create-token/) ).
+
+The third parameter of the constructor is the chat message text:
 
 ```java
 msg = new ChatMessage(connection.getConnectionId(), connection.getData(), data);

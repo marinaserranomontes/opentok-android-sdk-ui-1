@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
-* A Fragment for adding and controling text chat user interface.
+* A Fragment for adding and controling the text chat user interface.
 */
 public class TextChatFragment extends Fragment {
 
@@ -45,7 +45,7 @@ public class TextChatFragment extends Fragment {
     private TextView mMsgNotificationView;
     private View mMsgDividerView;
 
-    private int maxTextLength = 1000; // by default the maximum length is 1000.
+    private int maxTextLength = 1000; // By default the maximum length is 1000.
 
     private String senderId;
     private String senderAlias;
@@ -54,6 +54,7 @@ public class TextChatFragment extends Fragment {
         //Init the sender information for the output messages
         this.senderId = UUID.randomUUID().toString();
         this.senderAlias = "me";
+        Log.i(LOG_TAG, "senderstuff  " + this.senderId + this.senderAlias);
     }
 
     @Override
@@ -124,14 +125,14 @@ public class TextChatFragment extends Fragment {
     }
 
     /**
-     * Set the maximum length of a text chat message.
+     * Set the maximum length of a text chat message (in characters).
      */
     public void setMaxTextLength(int length) {
         maxTextLength = length;
     }
 
     /**
-     * Set the sender alias and the sender ID of the output messages.
+     * Set the sender alias and the sender ID of the outgoing messages.
      */
     public void setSenderInfo(String senderId, String senderAlias) {
         if ( senderAlias == null || senderId == null ) {
