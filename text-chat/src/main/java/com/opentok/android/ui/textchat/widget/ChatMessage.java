@@ -12,7 +12,7 @@ public class ChatMessage {
     /**
      * Defines the status of the message (whether it was a sent or received message).
      */
-    public static enum MessageStatus {
+    static enum MessageStatus {
         /**
          * The status for a sent message.
          */
@@ -27,7 +27,7 @@ public class ChatMessage {
     protected String senderAlias;
     protected String text;
     protected long timestamp;
-    protected MessageStatus status;
+    MessageStatus status;
     private UUID id;
 
     /**
@@ -110,14 +110,14 @@ public class ChatMessage {
     /**
      * Returns the sent/received status of the message.
      */
-    public MessageStatus getStatus() {
+    MessageStatus getStatus() {
         return status;
     }
 
     /**
      * Sets the sent/received status of the message.
      */
-    public void setStatus(MessageStatus status) {
+    void setStatus(MessageStatus status) {
         this.status = status;
     }
 
