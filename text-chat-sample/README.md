@@ -1,6 +1,6 @@
-OpenTok Android Text Chat UI sample
-===================================
-A basic sample app showing the use of the OpenTok Android Text Chat UI sample
+OpenTok Android Text Chat Component sample
+==========================================
+A basic sample app showing the use of the OpenTok Android Text Chat Component
 
 ## Configuring the app
 
@@ -17,12 +17,7 @@ A basic sample app showing the use of the OpenTok Android Text Chat UI sample
 4. Locate the armeabi and x86 directories in the OpenTok/libs directory of the OpenTok
    Android SDK, and drag them into the app/jniLibs directory of the project.
 
-5. Add the opentok-android-sdk-ui.aar file to the app/libs directory of the project.
-
-   The opentok-android-sdk-ui.aar file os available an the [opentok-android-sdk-ui
-   Releases](https://github.com/opentok/opentok-android-sdk-ui/releases) page.
-
-6. In the com.opentok.android.ui.textchat.sample.TextChatActivity.java class, set the following
+5. In the com.opentok.android.ui.textchat.sample.TextChatActivity.java class, set the following
    properties to a test OpenTok session ID, token, and API key:
 
    ```
@@ -33,7 +28,7 @@ A basic sample app showing the use of the OpenTok Android Text Chat UI sample
 
    For this sample app, you must set the connection data of the token to be the name of
    (or identifier for) the user. This is used to identify the user's text messages
-   in the text chat user interface. For more information, see
+   in the text chat component user interface. For more information, see
    [Connection data](https://tokbox.com/developer/guides/create-token/#connection-data).
 
    You can get a test OpenTok session ID, a test token, and your OpenTok API key at the
@@ -41,7 +36,7 @@ A basic sample app showing the use of the OpenTok Android Text Chat UI sample
    you must use the OpenTok server SDKs to generate a unique token for each user. See
    the [Token creation overview](https://tokbox.com/developer/guides/create-token/).
 
-7. Debug the project on a supported device.
+6. Debug the project on a supported device.
 
    For a list of supported devices, see the "Developer and client requirements"
    on [this page](https://tokbox.com/developer/sdks/android/).
@@ -69,7 +64,7 @@ if (mTextChatFragment == null)
 }
 ```
 
-The TextChatFragment class is defined in the OpenTok Android Text Chat UI API. It is an
+The TextChatFragment class is defined in the OpenTok Android Text Chat Component API. It is an
 Android Fragment that defines user interface that lets the user enter a text chat message to send.
 
 The code sets the TextChatActivity object as the listener for TextChatFragment events.
@@ -120,7 +115,7 @@ public void onSignalReceived(Session session, String type, String data, Connecti
 ```
 
 The code creates a new ChatMessage instance. The ChatMessage class is defined by the
-OpenTok Android Text Chat UI API. It defines a message to be displayed by a
+OpenTok Android Text Chat Component API. It defines a message to be displayed by a
 TextChatFragement instance. A ChatMessage instance has a sender (a string that identifies
 the sender of the message) and the text of the message.
 

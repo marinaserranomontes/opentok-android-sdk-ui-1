@@ -1,21 +1,20 @@
-OpenTok Android Text Chat widget
-================================
+OpenTok Android Text Chat Component
+===================================
 
-The OpenTok Android Text Chat widget provides code for adding a user interface component
+The OpenTok Android Text Chat Component provides code for adding a user interface component
 for displaying and capturing text chat messages in an Andriod application.
 
-The OpenTok Android Text Chat widget API is included in the opentok-android-sdk-ui.aar
-file, available an the [opentok-android-sdk-ui
-Releases](https://github.com/opentok/opentok-android-sdk-ui/releases) page.
+This component is currently available as a beta version. To obtain a binary version of
+the component, contact[text-chat-beta@tokbox.com](mailto:text-chat-beta@tokbox.com).
 
-The text-chat-sample directory in this repo uses the Text Chat widget the [OpenTok signaling 
-API](https://tokbox.com/developer/guides/signaling/android/) to provide text chat in an
-OpenTok session.
+The text-chat-sample directory in this repo uses the Text Chat Component and the
+[OpenTok signaling  API](https://tokbox.com/developer/guides/signaling/android/) to provide
+text chat in an OpenTok session.
 
-## Using the Text Chat widget
+## Using the Text Chat Component
 
 The com.opentok.android.ui.textchat.widget package includes the classes and interfaces
-that define the OpenTok Android Text Chat widget API.
+that define the OpenTok Android Text Chat Component API.
 
 The TextChatFragment class defines an Android Fragment for adding and controling the text chat
 user interface:
