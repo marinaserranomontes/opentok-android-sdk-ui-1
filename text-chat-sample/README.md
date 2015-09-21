@@ -74,7 +74,7 @@ interface.
 The code calls the `setMaxTextLength(length)` method of the TextChatFragment object to
 set the maximum length of the message.
 
-The code calls the `setSenderInfo(length)` method of the TextChatFragment object to
+The code calls the `setSenderInfo(id, alias)` method of the TextChatFragment object to
 set the sender ID and alias for the local client. The ID is set to the local client's
 OpenTok connection ID (a unique identifier), and the alias is set to the connection data
 added when you created a token for the user.
